@@ -2,10 +2,18 @@
 var inputDayEl = document.querySelector("#b-day");
 var inputMonthEl = document.querySelector("#b-month");
 var inputYearEl = document.querySelector("#b-year");
-var SaveButtonEl = document.querySelector("#submit");
+var inputNameEl = document.querySelector("#name");
+var nextBtn = document.querySelector("#next-btn");
+var SaveBtnEl = document.querySelector("#submit");
 var pictureCardEl = document.querySelector("#picture"); // TO BE REPLACED WITH PICTURE HOLDER
 
-var birthday; // TO BE REPLACED WITH INPUT
+var inputtedName;
+var profiles = [];
+var profile = {
+    name: "",
+    birthday: "",
+}
+var birthday; 
 var birthdayDate = new Date(birthday);
 
 // NASA API RELATED VARIABLES
@@ -13,24 +21,39 @@ var nasaAPIKey = "yO4gV7LKJVWKPZKFc7GlvBh0f5Ig8XZN2KOgjgRp";
 var startDateNasa = new Date(1995, 6, 1);
 var today = new Date();
 
-var profiles = [];
-var profile = {
-    name: "",
-    birthday: "",
-}
+
 
 
 updateProfiles();
 
-SaveButtonEl.addEventListener("click", function(e){
+nextBtn.addEventListener("click", function(e){
+    e.preventDefault();
+    inputtedName = inputNameEl.value;
+    localStorage.setItem("tempName", inputtedName);
+})
+
+SaveBtnEl.addEventListener("click", function(e){
+    updateProfiles();
     e.preventDefault();
     var bDay = inputDayEl.value;
     var bMonth = inputMonthEl.value;
     var bYear = inputYearEl.value;
     birthday = bYear + "-" + bMonth + "-" + bDay;
-    console.log(birthday);
 
-    if(birthdayDate > startDateNasa){ 
+    console.log(birthday);
+    console.log(localStorage.getItem("tempName"));
+
+    var newProfile = Object.create(profile);
+    var newProfileName = localStorage.getItem("tempName");
+    newProfile.name = newProfileName;
+    newProfile.birthday = birthday;
+
+    saveToLocalStorage(newProfile);
+
+    if(birthdayDate > startDateNasa){
+        
+        
+        console.log(newProfile);
         fetchNASAPicture(birthday);
     } else {
         var randomDate = new Date(startDateNasa.getTime() + Math.random() * (today.getTime() - startDateNasa.getTime()));
@@ -38,6 +61,8 @@ SaveButtonEl.addEventListener("click", function(e){
         console.log(randomDateFormatted);
         fetchNASAPicture(randomDateFormatted);
     }
+
+    // localStorage.removeItem("tempName");
 })
 
 
@@ -54,7 +79,7 @@ SaveButtonEl.addEventListener("click", function(e){
 
 // SAVE TO LOCAL STORAGE
 
-function saveToLocalStorage(profile){
+function saveToLocalStorage(){
     localStorage.setItem("profiles", JSON.stringify(profiles));
 }
 
@@ -65,14 +90,15 @@ function updateProfiles(){
     var savedProfiles;
     if(localStorage){
         savedProfiles = JSON.parse(localStorage.getItem("profiles"));
-    } else {
+
         if(savedProfiles){
             profiles = savedProfiles;
         } else {
             profiles = [];
         }
+        }
     }
-}
+
 
 
 // FETCH NASA PICTURE OF THE DAY AND DISPLAY
