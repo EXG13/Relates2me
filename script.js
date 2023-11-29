@@ -26,50 +26,39 @@ var today = new Date();
 
 updateProfiles();
 
+// 'NEXT' BUTTON THAT SAVES THE NAME TO LOCAL STORAGE
 nextBtn.addEventListener("click", function(e){
-    e.preventDefault();
     inputtedName = inputNameEl.value;
-    localStorage.setItem("tempName", inputtedName);
+    localStorage.setItem("tempName", inputtedName); // it stores the name temporary to link it to birthday on the second button
 })
 
+
+// 'SAVE' BUTTON THAT SAVES NAME & BIRTHDAY IN LOCAL STORAGE 
 SaveBtnEl.addEventListener("click", function(e){
     updateProfiles();
-    e.preventDefault();
+
     var bDay = inputDayEl.value;
     var bMonth = inputMonthEl.value;
     var bYear = inputYearEl.value;
     birthday = bYear + "-" + bMonth + "-" + bDay;
 
-    console.log(birthday);
-    console.log(localStorage.getItem("tempName"));
+    if(birthdayDate > startDateNasa){ // If birthday is in the range of NASA pic of the day (from 1995)
+        fetchNASAPicture(birthday);
+    } else {    // otherwise create a random date and choose a random pic
+        var randomDate = new Date(startDateNasa.getTime() + Math.random() * (today.getTime() - startDateNasa.getTime()));
+        var randomDateFormatted = dayjs(randomDate).format("YYYY-MM-DD");
+        fetchNASAPicture(randomDateFormatted);
+    }
 
+    // Create a new profile object and store it in the localStorage
     var newProfile = Object.create(profile);
     var newProfileName = localStorage.getItem("tempName");
     newProfile.name = newProfileName;
     newProfile.birthday = birthday;
-
     saveToLocalStorage(newProfile);
+    localStorage.removeItem("tempName"); // remove temporarily store name, to make a space for a new one
 
-    if(birthdayDate > startDateNasa){
-        
-        
-        console.log(newProfile);
-        fetchNASAPicture(birthday);
-    } else {
-        var randomDate = new Date(startDateNasa.getTime() + Math.random() * (today.getTime() - startDateNasa.getTime()));
-        var randomDateFormatted = dayjs(randomDate).format("YYYY-MM-DD");
-        console.log(randomDateFormatted);
-        fetchNASAPicture(randomDateFormatted);
-    }
-
-    // localStorage.removeItem("tempName");
-})
-
-
-
-
-
-
+});
 
 
 
@@ -79,7 +68,8 @@ SaveBtnEl.addEventListener("click", function(e){
 
 // SAVE TO LOCAL STORAGE
 
-function saveToLocalStorage(){
+function saveToLocalStorage(object){
+    profiles.push(object);
     localStorage.setItem("profiles", JSON.stringify(profiles));
 }
 
