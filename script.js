@@ -1,5 +1,7 @@
 /* --------------------------------------------------- VARIABLES ---------------------------------------------------- */
-var inputEl = document.querySelector("#b-day");
+var inputDayEl = document.querySelector("#b-day");
+var inputMonthEl = document.querySelector("#b-month");
+var inputYearEl = document.querySelector("#b-year");
 var SaveButtonEl = document.querySelector("#submit");
 var pictureCardEl = document.querySelector("#picture"); // TO BE REPLACED WITH PICTURE HOLDER
 
@@ -22,11 +24,20 @@ updateProfiles();
 
 SaveButtonEl.addEventListener("click", function(e){
     e.preventDefault();
-    var bDay = inputEl.value;
-    var bMonth = inputEl.value;
-    var bYear = inputEl.value;
+    var bDay = inputDayEl.value;
+    var bMonth = inputMonthEl.value;
+    var bYear = inputYearEl.value;
     birthday = bYear + "-" + bMonth + "-" + bDay;
     console.log(birthday);
+
+    if(birthdayDate > startDateNasa){ 
+        fetchNASAPicture(birthday);
+    } else {
+        var randomDate = new Date(startDateNasa.getTime() + Math.random() * (today.getTime() - startDateNasa.getTime()));
+        var randomDateFormatted = dayjs(randomDate).format("YYYY-MM-DD");
+        console.log(randomDateFormatted);
+        fetchNASAPicture(randomDateFormatted);
+    }
 })
 
 
@@ -35,14 +46,7 @@ SaveButtonEl.addEventListener("click", function(e){
 
 
 
-if(birthdayDate > startDateNasa){ 
-    fetchNASAPicture(birthday);
-} else {
-    var randomDate = new Date(startDateNasa.getTime() + Math.random() * (today.getTime() - startDateNasa.getTime()));
-    var randomDateFormatted = dayjs(randomDate).format("YYYY-MM-DD");
-    console.log(randomDateFormatted);
-    fetchNASAPicture(randomDateFormatted);
-}
+
 
 
 
