@@ -1,11 +1,9 @@
-# Relates2me
+# Celestial Chronicles
 
 ## Description
 
 Link to website:
 
-![Alt text]()
-![Alt text]()
 ![Alt text]()
 
 ## Installation
