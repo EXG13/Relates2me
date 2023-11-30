@@ -108,3 +108,18 @@ function fetchNASAPicture(date){
         // pictureCardEl.setAttribute("src", nasaPictureURL);  // ENABLE WHEN READY
 })
 }
+
+
+function displayNewProfile(){
+    if (localStorage){
+        var selectEl = document.createElement("select");
+        selectEl.setAttribute("multiple", "true");
+        selectEl.setAttribute("size", profiles.length);
+        for(i=0; i < profiles.length; i++){
+            var option = document.createElement("option");
+            option.textContent = profiles[i];
+            selectEl.appendChild(option);
+        }
+        // container.appendChild(selectEl); // UPDATE WHEN READY
+    }
+}
