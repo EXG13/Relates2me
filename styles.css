@@ -1,1 +1,61 @@
 /* variables */
+
+body {
+  font-family: "Barlow", sans-serif;
+  color: #e0e0e0;
+}
+
+/* Hero */
+
+#heroBackground {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.9)),
+    url(./assets/pexels-alex-andrews-3805983.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#hero {
+  min-width: 500px;
+  max-width: 700px;
+  text-align: center;
+  /* margin-top: 50px; */
+}
+
+#hero h1 {
+  font-size: 4rem;
+}
+
+#hero p {
+  margin-top: 35px;
+  opacity: 0.7;
+}
+
+#hero a {
+  margin-top: 30px;
+  background-color: #13695b;
+  color: #daefeb;
+  mix-blend-mode: screen;
+  font-size: 15px;
+}
+
+#hero a:hover {
+  background-color: #521369;
+  color: #daefeb;
+}
+
+/* end of hero */
+
+@media screen and (max-width: 800px) {
+  #hero h1 {
+    font-size: 3rem;
+  }
+
+  #hero p {
+    padding: 2rem;
+  }
+}
