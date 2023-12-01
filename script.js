@@ -112,17 +112,21 @@ function fetchNASAPicture(date){
 }
 
 
-function displayNewProfile(){
+function displayAllProfiles(){
     if (localStorage){
         var selectEl = document.createElement("select");
-        selectEl.setAttribute("multiple", "true");
+        selectEl.setAttribute("multiple", "yes");
         selectEl.setAttribute("size", profiles.length);
+
         for(i=0; i < profiles.length; i++){
             var option = document.createElement("option");
+            option.setAttribute("value", profiles[i]);
+            option.setAttribute('onClick', 'addToCompare("' + profiles[i] + '")');
             option.textContent = profiles[i];
             selectEl.appendChild(option);
         }
-        // container.appendChild(selectEl); // UPDATE WHEN READY
+        
+        container.appendChild(selectEl); // UPDATE WHEN READY
     }
 }
 
