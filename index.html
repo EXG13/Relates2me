@@ -1,73 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- Google Fonts -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Barlow:wght@100&family=Bodoni+Moda:opsz,wght@6..96,700&family=Pacifico&family=Roboto+Slab&display=swap"
-        rel="stylesheet">
+      href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;300&display=swap"
+      rel="stylesheet"
+    />
     <!--  Bootstrap  -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
     <!-- CSS -->
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
 
     <title>Celestial Chronicles</title>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <!-- Hero section -->
     <section>
-        <div id="heroBackground" class="p-5 mb-4 bg-body-tertiary">
-            <div id="hero" class="container-fluid py-5">
-                <h1>Celestial Chronicles</h1>
-                <p>
-                    Welcome, cosmic explorer! Prepare to embark on a journey through the
-                    stars and time. Celestial Chronicles beckons you to uncover the
-                    secrets of your birthdate and witness the cosmic spectacle that
-                    unfolded on that fateful day. Ready to dive into the cosmic archives
-                    and discover the wonders that awaited you in the vastness of space?
-                </p>
-                <a href="#" class="btn btn-lg"> LAUNCH INTO THE COSMOS </a>
-            </div>
+      <div id="heroBackground" class="p-5 mb-4 bg-body-tertiary">
+        <div id="hero" class="container-fluid py-5">
+          <h1>Celestial Chronicles</h1>
+          <p>
+            Welcome, cosmic explorer! Prepare to embark on a journey through the
+            stars and time. Celestial Chronicles beckons you to uncover the
+            secrets of your birthdate and witness the cosmic spectacle that
+            unfolded on that fateful day. Ready to dive into the cosmic archives
+            and discover the wonders that awaited you in the vastness of space?
+          </p>
+          <a href="#" class="btn btn-lg"> LAUNCH INTO THE COSMOS </a>
         </div>
+      </div>
     </section>
     <!-- End of hero section -->
 
-
     <!-- ANNA's CODE -->
-
-
+    <section class="name-section container-fluid m-0 p-0">
+      <div id="name-back">
+        <div class="col-md-6 col-10 text-center align-content-center position-absolute top-50 start-50 translate-middle">
+          <p class="name-text mb-5 mb-md-0">What shall we call you in this celestial odyssey?</p>
+          <div class="input-group justify-content-center mb-5 mt-5">
+            <input id="name-input" type="text" class="form-control text-center mb-5 mt-5" aria-label="Sizing example input"
+              placeholder="Your Name" aria-describedby="inputGroup-sizing-default">
+          </div>
+          <button type="submit" class="btn btn mt-5 mt-md-0 p-0"></button>
+        </div>
+      </div>
+    </section>
     <!--  End of ANNA's CODE -->
 
     <!--////////////////////////////////  DATE SECTION ////////////////////////////////-->
     <section class="date-section">
-        <div id="date-img">
-            <img src="" alt="">
-            <h2> Unlock the celestial secrets by sharing your birthdate. </h2>
-            <form action="" method="post">
-                <label for="day"></label>
-                <input type="text" id="day" name="day" maxlength="2" placeholder="DD" required>
+      <div id="date-img">
+        <img src="" alt="" />
+        <h2>Unlock the celestial secrets by sharing your birthdate.</h2>
+        <form action="" method="post">
+          <label for="day"></label>
+          <input
+            type="text"
+            id="day"
+            name="day"
+            maxlength="2"
+            placeholder="DD"
+            required
+          />
 
-                <label for="month"></label>
-                <input type="text" id="month" name="month" maxlength="2" placeholder="MM" required>
+          <label for="month"></label>
+          <input
+            type="text"
+            id="month"
+            name="month"
+            maxlength="2"
+            placeholder="MM"
+            required
+          />
 
-                <label for="year"></label>
-                <input type="text" id="year" name="year" maxlength="4" placeholder="YYYY" required>
+          <label for="year"></label>
+          <input
+            type="text"
+            id="year"
+            name="year"
+            maxlength="4"
+            placeholder="YYYY"
+            required
+          />
 
-                <button type="button" onclick="submitForm()">REVEAL MY CELESTIAL CHRONICLES</button>
-            </form>
-        </div>
+          <button type="button" onclick="submitForm()">
+            REVEAL MY CELESTIAL CHRONICLES
+          </button>
+        </form>
+      </div>
     </section>
     <!--//////////////////////////////// END OF DATE SECTION ////////////////////////////////-->
 
-
-
     <script src="https://cdn.jsdelivr.net/npm/dayjs@1/dayjs.min.js"></script>
     <script src="script.js"></script>
-</body>
-
+  </body>
 </html>
