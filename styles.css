@@ -72,6 +72,83 @@
 
 /*  End of Hero */
 
+/* Name section */
+.name-section {
+  width: 100%;
+  position: relative;
+}
+
+#name-back {
+  height: 100vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.9)),
+    url(./assets/pexels-alex-andrews-3805983.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.name-text {
+  font-size: 30px;
+  font-weight: 300;
+  color: var(--unnamed-color-daefeb);
+}
+
+.form-control {
+  font-family: "Barlow", sans-serif;
+  max-width: 50%;
+  height: 50px;
+  border-radius: 10px;
+  background: var(--unnamed-color-13695b);
+  opacity: 0.9;
+  font-size: 28px;
+  font-weight: 500;
+  word-spacing: 5px;
+}
+
+#name-input::placeholder {
+  color: var(--unnamed-color-daefeb);
+  opacity: 0.6;
+}
+
+.btn {
+  width: 0;
+  height: 0;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 30px solid var(--unnamed-color-13695b);
+  opacity: 0.9;
+}
+
+.form-control:hover {
+  background: var(--unnamed-color-521369);
+  opacity: 0.8;
+}
+
+.btn:focus,
+.btn:hover,
+.btn:active {
+  box-shadow: none;
+  border-left: 25px solid transparent;
+  border-right: 25px solid transparent;
+  border-top: 30px solid var(--unnamed-color-521369);
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 998px) {
+  .name-text {
+    font-size: 22px;
+  }
+
+  .form-control {
+    max-width: 75%;
+    height: 40px;
+    font-size: 18px;
+    margin-bottom: 50px;
+  }
+}
+
+/* End name section */
 /*//////////////////////////////////// DATE SECTION ////////////////////////////////////*/
 
 .date-section {
