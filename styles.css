@@ -15,6 +15,7 @@
   padding: 0;
   font-family: "Barlow", sans-serif;
   color: var(--unnamed-color-daefeb);
+  scroll-behavior: smooth;
 }
 
 /* Hero */
@@ -89,7 +90,7 @@
 }
 
 .name-text {
-  font-size: 30px;
+  font-size: 34px;
   font-weight: 300;
   color: var(--unnamed-color-daefeb);
 }
@@ -100,10 +101,11 @@
   height: 50px;
   border-radius: 10px;
   background: var(--unnamed-color-13695b);
-  opacity: 0.9;
+  opacity: 0.7;
   font-size: 28px;
-  font-weight: 500;
+  font-weight: 600;
   word-spacing: 5px;
+  border: none;
 }
 
 #name-input::placeholder {
@@ -111,28 +113,40 @@
   opacity: 0.6;
 }
 
-.btn {
+.btn-name {
   width: 0;
   height: 0;
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
   border-top: 30px solid var(--unnamed-color-13695b);
-  opacity: 0.9;
+  opacity: 0.7;
 }
 
 .form-control:hover {
   background: var(--unnamed-color-521369);
-  opacity: 0.8;
+  opacity: 0.7;
+  box-shadow: none;
+  color: white;
+}
+.form-control:focus {
+  background: var(--unnamed-color-94bbb3);
+  color: white;
+}
+.form-control:hover::content{
+  color: white;
 }
 
-.btn:focus,
-.btn:hover,
+
+.btn-name:focus,
+.btn-name:hover,
 .btn:active {
   box-shadow: none;
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
   border-top: 30px solid var(--unnamed-color-521369);
-  opacity: 0.8;
+  opacity: 0.7;
+  outline: none; 
+  outline-color: transparent;
 }
 
 @media screen and (max-width: 998px) {
@@ -149,6 +163,7 @@
 }
 
 /* End name section */
+
 /*//////////////////////////////////// DATE SECTION ////////////////////////////////////*/
 
 .date-section {
