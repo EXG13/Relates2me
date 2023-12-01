@@ -48,15 +48,14 @@
 
 #hero a {
   margin-top: 30px;
-  background-color: #13695b;
-  color: #daefeb;
+  background-color: var(--unnamed-color-13695b);
+  color: var(--unnamed-color-daefeb);
   mix-blend-mode: screen;
-  font-size: 15px;
 }
 
 #hero a:hover {
-  background-color: #521369;
-  color: #daefeb;
+  background-color: var(--unnamed-color-521369);
+  color: var(--unnamed-color-daefeb);
 }
 
 /* end of hero */
@@ -127,7 +126,7 @@
   background: #13695b 0% 0% no-repeat padding-box;
   mix-blend-mode: screen;
   border-radius: 15px;
-  border-color: #13695b;
+  border-color: var(--unnamed-color-13695b);
   margin: 0 10px;
 }
 
@@ -142,12 +141,12 @@
   background: #521369 0% 0% no-repeat padding-box;
   mix-blend-mode: screen;
   border-radius: 15px;
-  border-color: #521369;
+  border-color: var(--unnamed-color-521369);
   border: none;
 }
 
 .date-section button:hover {
-  background-color: #13695b;
+  background-color: var(--unnamed-color-13695b);
   border-color: var(--unnamed-color-13695b);
 }
 
