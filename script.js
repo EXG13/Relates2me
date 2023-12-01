@@ -19,6 +19,8 @@ var nasaAPIKey = "yO4gV7LKJVWKPZKFc7GlvBh0f5Ig8XZN2KOgjgRp";
 var startDateNasa = new Date(1995, 6, 1);
 var today = new Date();
 
+// VARIABLES FOR COMPARISON
+var selected = []; // store two selected buttons
 
 
 
@@ -123,3 +125,30 @@ function displayNewProfile(){
         // container.appendChild(selectEl); // UPDATE WHEN READY
     }
 }
+
+
+//  select two (and only 2) elements
+function addToCompare(val){
+    if(!contains(selected, val)){
+        if(selected.length <= 1){
+            selected.push(val);
+            console.log(selected);
+        } else if(selected.length > 1){
+            selected.shift(selected[0]);
+            selected.push(val);
+            console.log(selected);
+        }
+    }
+}
+
+// Check if array contains obj, to avoid 2 the same objects in comparison
+function contains(array, obj) {
+    var len = array.length;
+    for(i=0; i<len; i++){
+        if(array[i] === obj){
+            return true;
+        }
+    }
+    return false;
+}
+
