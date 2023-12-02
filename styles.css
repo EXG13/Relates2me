@@ -53,6 +53,7 @@
   background-color: var(--unnamed-color-13695b);
   color: var(--unnamed-color-daefeb);
   mix-blend-mode: screen;
+  border: none;
 }
 
 #hero a:hover {
