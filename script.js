@@ -4,6 +4,7 @@ var inputMonthEl = document.querySelector("#month");
 var inputYearEl = document.querySelector("#year");
 var inputNameEl = document.querySelector("#name-input");
 var SaveBtnEl = document.querySelector("button");
+var profileBtnContainerEl = document.querySelector("#buttonName");
 
 var pictureCardEl = document.querySelector("#cardPicture"); // TO UPDATE WHEN READY
 
@@ -29,6 +30,8 @@ var selected = []; // store two selected buttons
 updateProfiles();
 
 displayAllProfiles();
+
+profileBtnContainerEl.addEventListener("click", compareTwoProfiles);
 
 
 /* -----------------------------------------------------FUNCTIONS ---------------------------------------------------- */
@@ -137,10 +140,6 @@ function checkIfDateInNasaRange(date){
 
 // Display all the profiles as buttons in the NAV bar
 function displayAllProfiles(){
-    var profileBtnContainerEl = document.querySelector("#buttonName");
-    console.log(profileBtnContainerEl.firstElementChild);
-        console.log(profileBtnContainerEl.lastElementChild);
-
     var buttonCompare = document.querySelector("#checkBtn");
     var startAgainBtn = document.querySelector('#startAgain');
 
@@ -153,7 +152,7 @@ function displayAllProfiles(){
         for(i=0; i < profiles.length; i++){
             var profileBtn = document.createElement("button");
 
-            profileBtn.setAttribute("class", "customBtn");
+            profileBtn.setAttribute("class", "customBtn off");
             profileBtn.textContent = profiles[i].name;
 
             profileBtnContainerEl.appendChild(profileBtn);
@@ -170,11 +169,9 @@ function addToCompare(val){
     if(!contains(selected, val)){
         if(selected.length <= 1){
             selected.push(val);
-            console.log(selected);
         } else if(selected.length > 1){
             selected.shift(selected[0]);
             selected.push(val);
-            console.log(selected);
         }
     }
 }
@@ -188,4 +185,17 @@ function contains(array, obj) {
         }
     }
     return false;
+}
+
+function compareTwoProfiles(e){
+    console.log(e.target);
+    selectedProfile = e.target;
+    if(selectedProfile.classList[1] === "off"){
+        selectedProfile.setAttribute("class", "customBtn on");
+    } else{
+        selectedProfile.setAttribute("class", "customBtn off");
+    }
+
+    addToCompare(selectedProfile.innerHTML);
+
 }
