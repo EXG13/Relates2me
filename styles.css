@@ -237,6 +237,7 @@ i {
   height: 50px;
   border-radius: 10px;
   background: var(--unnamed-color-13695b);
+  mix-blend-mode: screen;
   opacity: 0.7;
   font-size: 28px;
   font-weight: 600;
@@ -487,3 +488,76 @@ i {
   }
 }
 /*//////////////////////////////////// END OF CARD SECTION ////////////////////////////////////*/
+
+/* Card comparison section */
+.card-comparison-section {
+  width: 100%;
+  position: relative;
+}
+
+#card-comparison-back {
+  height: 150vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.9)),
+    url(./assets/pexels-alex-andrews-3805983.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.card-comparison-header {
+  margin-top: 100px;
+  font-size: 56px;
+  color: var(--unnamed-color-daefeb);
+}
+
+.card-comperison {
+  mix-blend-mode: screen;
+}
+
+.card-comperison-body {
+  background:  rgba(99, 23, 127, 0.4) 0% 0% no-repeat padding-box;
+ 
+  color: white ;
+  height: 55%;
+}
+.card-img-top {
+  opacity: 0.5;
+}
+
+.card-comperison-name {
+  font-weight: 600;
+}
+
+.birthDate {
+  font-size: 20;
+  font-weight: 600;
+}
+
+.card-comperison-text {
+  font-size: 14;
+  font-weight: 100;
+  overflow: auto
+}
+
+@media screen and (max-width: 998px) {
+  .card-comparison-header {
+    font-size: 40px;
+
+  }
+  .card-comparison-header{
+    margin-top: 50px;
+  }
+  .birthDate {
+    font-size: 16;
+  }
+  .card-comperison-text {
+    font-size: 10;
+  }
+
+  .card-comperison-body{
+    height: 65%;
+  }
+}
+
+/* End card comparison section */
