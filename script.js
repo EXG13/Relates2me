@@ -2,8 +2,8 @@
 var inputDayEl = document.querySelector("#day");
 var inputMonthEl = document.querySelector("#month"); 
 var inputYearEl = document.querySelector("#year");
-var inputNameEl = document.querySelector("#name-input"); // !! TO UPDATE & ENABLE WHEN READY
-var SaveBtnEl = document.querySelector("button"); // UPDATE
+var inputNameEl = document.querySelector("#name-input");
+var SaveBtnEl = document.querySelector("button");
 
 var pictureCardEl = document.querySelector("#cardPicture"); // TO UPDATE WHEN READY
 
