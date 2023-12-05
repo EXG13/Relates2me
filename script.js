@@ -4,8 +4,8 @@ var inputMonthEl = document.querySelector("#month");
 var inputYearEl = document.querySelector("#year");
 var inputNameEl = document.querySelector("#name-input"); // !! TO UPDATE & ENABLE WHEN READY
 var SaveBtnEl = document.querySelector("button"); // UPDATE
-var profileBtnContainerEl = document.querySelector("#buttonName"); 
-// var pictureCardEl = document.querySelector("#picture"); // TO UPDATE WHEN READY
+
+var pictureCardEl = document.querySelector("#cardPicture"); // TO UPDATE WHEN READY
 
 var profiles = [];
 var profile = {
@@ -114,21 +114,24 @@ function fetchNASAPicture(date){
     })
     .then(function(data){
         var nasaPictureURL = data.url
-        // pictureCardEl.setAttribute("src", nasaPictureURL);  // ENABLE WHEN READY
+        pictureCardEl.setAttribute("src", nasaPictureURL);  // ENABLE WHEN READY
 })
 }
 
 // Display all the profiles as buttons in the NAV bar
 function displayAllProfiles(){
-    while(i--){
-        
-    }
+    var profileBtnContainerEl = document.querySelector("#buttonName"); 
+
     if (localStorage){
+        while(profileBtnContainerEl.lastChild){
+            profileBtnContainerEl.removeChild(profileBtnContainerEl.lastChild);
+        }
+
         console.log("profiles: " + JSON.stringify(profiles));
-        var buttonCompare = document.querySelector(".customBtn-check");
 
         for(i=0; i < profiles.length; i++){
             var profileBtn = document.createElement("button");
+            var buttonCompare = document.querySelector(".customBtn-check");
             profileBtn.setAttribute("class", "customBtn");
 
             profileBtn.textContent = profiles[i].name;
