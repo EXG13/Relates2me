@@ -2,8 +2,9 @@
 var inputDayEl = document.querySelector("#day");
 var inputMonthEl = document.querySelector("#month"); 
 var inputYearEl = document.querySelector("#year");
-// var inputNameEl = document.querySelector("#name"); // !! TO UPDATE & ENABLE WHEN READY
+var inputNameEl = document.querySelector("#name-input"); // !! TO UPDATE & ENABLE WHEN READY
 var SaveBtnEl = document.querySelector("button"); // UPDATE
+var profileBtnContainerEl = document.querySelector("#buttonName"); 
 // var pictureCardEl = document.querySelector("#picture"); // TO UPDATE WHEN READY
 
 var profiles = [];
@@ -25,6 +26,10 @@ var selected = []; // store two selected buttons
 
 
 updateProfiles();
+
+if(profiles){
+    displayAllProfiles();
+}
 
 
 
@@ -58,7 +63,7 @@ function submitForm(){
 
     updateProfiles();
     
-    var name = ""; // UPDATE WITH: inputNameEl.value; - when ready
+    var name = inputNameEl.value; 
     
     var bDay = inputDayEl.value;
     var bMonth = inputMonthEl.value;
@@ -92,6 +97,8 @@ function createProfile(name, birthday){
     newProfile.name = newProfileName;
     newProfile.birthday = birthday;
     saveToLocalStorage(newProfile);
+
+    displayAllProfiles();
 }
 
 
@@ -114,19 +121,22 @@ function fetchNASAPicture(date){
 
 function displayAllProfiles(){
     if (localStorage){
-        var selectEl = document.createElement("select");
-        selectEl.setAttribute("multiple", "yes");
-        selectEl.setAttribute("size", profiles.length);
+        console.log("profiles: " + JSON.stringify(profiles));
+        // var selectEl = document.createElement("select");
+        // selectEl.setAttribute("multiple", "yes");
+        // selectEl.setAttribute("size", profiles.length);
 
         for(i=0; i < profiles.length; i++){
-            var option = document.createElement("option");
-            option.setAttribute("value", profiles[i]);
-            option.setAttribute('onClick', 'addToCompare("' + profiles[i] + '")');
-            option.textContent = profiles[i];
-            selectEl.appendChild(option);
+            var profileBtn = document.createElement("button");
+            profileBtn.setAttribute("class", "customBtn");
+            // var option = document.createElement("option");
+            // option.setAttribute("value", profiles[i]);
+            profileBtn.textContent = profiles[i].name;
+            // option.setAttribute('onClick', 'addToCompare("' + profiles[i] + '")');
+            // option.textContent = profiles[i];
+            // selectEl.appendChild(option);
+            profileBtnContainerEl.appendChild(profileBtn); // UPDATE WHEN READY
         }
-        
-        container.appendChild(selectEl); // UPDATE WHEN READY
     }
 }
 
