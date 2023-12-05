@@ -256,6 +256,7 @@ i {
   border-right: 25px solid transparent;
   border-top: 30px solid var(--unnamed-color-13695b);
   opacity: 0.7;
+  border-radius: 7px;
 }
 
 .form-control:hover {
