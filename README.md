@@ -4,7 +4,10 @@
 
 Link to website:
 
-![Alt text]()
+![Alt text](./screenshots/Hero%20section.PNG)
+![Alt text](./screenshots/Name%20Section.PNG)
+![Alt text](./screenshots/Date%20Section.PNG)
+![Alt text](./screenshots/Card%20Section.PNG)
 
 ## Installation
 
