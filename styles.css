@@ -237,8 +237,8 @@ i {
   height: 50px;
   border-radius: 10px;
   background: var(--unnamed-color-13695b);
-  mix-blend-mode: screen;
-  opacity: 0.7;
+  filter: brightness(150%) saturate(150%);
+  opacity: 0.5;
   font-size: 28px;
   font-weight: 600;
   word-spacing: 5px;
@@ -256,7 +256,8 @@ i {
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
   border-top: 30px solid var(--unnamed-color-13695b);
-  opacity: 0.7;
+  filter: brightness(150%) saturate(150%);
+  opacity: 0.5;
 }
 
 .form-control:hover {
@@ -265,10 +266,7 @@ i {
   box-shadow: none;
   color: white;
 }
-.form-control:focus {
-  background: var(--unnamed-color-94bbb3);
-  color: white;
-}
+
 .form-control:hover::content {
   color: white;
 }
@@ -451,7 +449,6 @@ i {
   .card img {
     height: 300px;
     width: 300px;
-
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
@@ -512,30 +509,30 @@ i {
 }
 
 .card-comperison {
-  mix-blend-mode: screen;
+  filter: brightness(140%) saturate(200%);
 }
 
 .card-comperison-body {
-  background:  rgba(99, 23, 127, 0.4) 0% 0% no-repeat padding-box;
- 
+  background:  rgba(99, 23, 127, 0.4);
   color: white ;
   height: 55%;
 }
 .card-img-top {
-  opacity: 0.5;
+  opacity: 0.4;
 }
 
 .card-comperison-name {
-  font-weight: 600;
+  font-weight: 500;
 }
 
 .birthDate {
-  font-size: 20;
-  font-weight: 600;
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
 }
 
 .card-comperison-text {
-  font-size: 14;
+  font-size: 16px;
   font-weight: 100;
   overflow: auto
 }
@@ -543,21 +540,18 @@ i {
 @media screen and (max-width: 998px) {
   .card-comparison-header {
     font-size: 40px;
-
   }
   .card-comparison-header{
     margin-top: 50px;
   }
   .birthDate {
-    font-size: 16;
+    font-size: 16px;
   }
   .card-comperison-text {
-    font-size: 10;
+    font-size: 12px;
   }
-
   .card-comperison-body{
     height: 65%;
   }
 }
-
 /* End card comparison section */
