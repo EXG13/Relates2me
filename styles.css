@@ -398,7 +398,7 @@ i {
 .cardNav ul {
   position: absolute;
   margin-left: 78%;
-  margin-top: 10%;
+  margin-top: 12%;
   list-style-type: none;
   display: inline-flex;
   text-align: end;
@@ -471,7 +471,7 @@ i {
   }
 
   .cardNav ul {
-    margin: 180px 310px;
+    margin: 210px 320px;
     margin-left: 55%;
     padding: 10px;
   }
