@@ -395,17 +395,16 @@ i {
   background-repeat: no-repeat;
 }
 
-.cardNav ul{
+.cardNav ul {
   position: absolute;
   margin-left: 78%;
   margin-top: 10%;
   list-style-type: none;
   display: inline-flex;
   text-align: end;
-  
 }
 
-.cardNav li a{
+.cardNav li a {
   font-size: 25px;
   color: var(--unnamed-color-94bbb3);
   margin-right: 15px;
@@ -477,7 +476,7 @@ i {
     padding: 10px;
   }
 
-  .cardNav li a{
+  .cardNav li a {
     font-size: 20px;
   }
 }
