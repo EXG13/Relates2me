@@ -115,19 +115,19 @@ span {
   background-color: #03806b;
 }
 
-#buttonName a,
+a,
 i {
   color: var(--unnamed-color-94bbb3);
   text-decoration: none;
   padding: 2px;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
-#buttonName a:hover {
+a:hover {
   color: #e0e0e0;
 }
 
-#buttonName a:hover i {
+a:hover i {
   color: #e0e0e0;
 }
 
