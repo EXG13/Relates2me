@@ -69,6 +69,11 @@ function submitForm(){
     var bMonth = inputMonthEl.value;
     var bYear = inputYearEl.value;
     birthday = bYear + "-" + bMonth + "-" + bDay;
+
+    var cardNameEl = document.querySelector("#cardName");
+    var cardDateEl = document.querySelector("#cardDate");
+    cardNameEl.textContent = name;
+    cardDateEl.textContent = dayjs(birthday).format("DD MMM YYYY");
     
     if(birthdayDate > startDateNasa){ // If birthday is in the range of NASA pic of the day (from 1995)
         fetchNASAPicture(birthday);
