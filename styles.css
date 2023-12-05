@@ -395,6 +395,11 @@ i {
   background-repeat: no-repeat;
 }
 
+.cardNav button {
+  background: none;
+  border: none;
+}
+
 .cardNav ul {
   position: absolute;
   margin-left: 78%;
@@ -430,6 +435,7 @@ i {
 
 .card img {
   border-radius: 34px 0 0 34px;
+  object-fit: cover;
 }
 
 .card-title {
