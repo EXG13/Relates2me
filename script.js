@@ -118,25 +118,21 @@ function fetchNASAPicture(date){
 })
 }
 
-
+// Display all the profiles as buttons in the NAV bar
 function displayAllProfiles(){
     if (localStorage){
         console.log("profiles: " + JSON.stringify(profiles));
-        // var selectEl = document.createElement("select");
-        // selectEl.setAttribute("multiple", "yes");
-        // selectEl.setAttribute("size", profiles.length);
+        var buttonCompare = document.querySelector(".customBtn-check");
 
         for(i=0; i < profiles.length; i++){
             var profileBtn = document.createElement("button");
             profileBtn.setAttribute("class", "customBtn");
-            // var option = document.createElement("option");
-            // option.setAttribute("value", profiles[i]);
+
             profileBtn.textContent = profiles[i].name;
-            // option.setAttribute('onClick', 'addToCompare("' + profiles[i] + '")');
-            // option.textContent = profiles[i];
-            // selectEl.appendChild(option);
-            profileBtnContainerEl.appendChild(profileBtn); // UPDATE WHEN READY
+
+            profileBtnContainerEl.insertBefore(profileBtn, buttonCompare);
         }
+
     }
 }
 
