@@ -77,14 +77,14 @@ function submitForm(){
     if (name && birthday){
         birthday = bYear + "-" + bMonth + "-" + bDay;
         nasaQueryURL = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + birthday;
-        checkIfDateInNasaRange(birthdayFormatted);
+        checkIfDateInNasaRange(birthday);
         createProfile(name, birthday);
 
     } else if (!name){
         birthday = bYear + "-" + bMonth + "-" + bDay;
         nasaQueryURL = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + birthday;
         name = "Anonymous";
-        checkIfDateInNasaRange(birthdayFormatted);
+        checkIfDateInNasaRange(birthday);
         createProfile(name, birthday);
 
     } else if (!birthday){
@@ -138,20 +138,27 @@ function checkIfDateInNasaRange(date){
 // Display all the profiles as buttons in the NAV bar
 function displayAllProfiles(){
     var profileBtnContainerEl = document.querySelector("#buttonName");
+    var selectContainerEl = document.createElement("select");
+
     var buttonCompare = document.querySelector("#checkBtn");
+    // var startAgainBtn = document.querySelector('#startAgain');
 
     if (localStorage){
-        while(profileBtnContainerEl.lastChild){
-            profileBtnContainerEl.removeChild(profileBtnContainerEl.lastChild);
-        }
+        // while(profileBtnContainerEl.lastChild.length > 2){
+        //     if(profileBtnContainerEl.lastChild.id !== buttonCompare.id || profileBtnContainerEl.lastChild.id != startAgainBtn.id){
+        //         profileBtnContainerEl.removeChild(profileBtnContainerEl.lastChild);
+        //     }
+        // }
 
         for(i=0; i < profiles.length; i++){
-            var profileBtn = document.createElement("button");
+            var profileBtn = document.createElement("option");
 
             profileBtn.setAttribute("class", "customBtn");
             profileBtn.textContent = profiles[i].name;
 
-            profileBtnContainerEl.insertBefore(profileBtn, buttonCompare);
+            // profileBtnContainerEl.insertBefore(profileBtn, buttonCompare);
+            selectContainerEl.appendChild(profileBtn);
+            profileBtnContainerEl.appendChild(selectContainerEl);
         }
 
     }
