@@ -138,29 +138,29 @@ function checkIfDateInNasaRange(date){
 // Display all the profiles as buttons in the NAV bar
 function displayAllProfiles(){
     var profileBtnContainerEl = document.querySelector("#buttonName");
-    var selectContainerEl = document.createElement("select");
+    console.log(profileBtnContainerEl.firstElementChild);
+        console.log(profileBtnContainerEl.lastElementChild);
 
     var buttonCompare = document.querySelector("#checkBtn");
-    // var startAgainBtn = document.querySelector('#startAgain');
+    var startAgainBtn = document.querySelector('#startAgain');
 
     if (localStorage){
-        // while(profileBtnContainerEl.lastChild.length > 2){
-        //     if(profileBtnContainerEl.lastChild.id !== buttonCompare.id || profileBtnContainerEl.lastChild.id != startAgainBtn.id){
-        //         profileBtnContainerEl.removeChild(profileBtnContainerEl.lastChild);
-        //     }
-        // }
+        
+        while(profileBtnContainerEl.lastChild){
+            profileBtnContainerEl.removeChild(profileBtnContainerEl.lastChild);
+        }
 
         for(i=0; i < profiles.length; i++){
-            var profileBtn = document.createElement("option");
+            var profileBtn = document.createElement("button");
 
             profileBtn.setAttribute("class", "customBtn");
             profileBtn.textContent = profiles[i].name;
 
-            // profileBtnContainerEl.insertBefore(profileBtn, buttonCompare);
-            selectContainerEl.appendChild(profileBtn);
-            profileBtnContainerEl.appendChild(selectContainerEl);
+            profileBtnContainerEl.appendChild(profileBtn);
         }
 
+        profileBtnContainerEl.appendChild(buttonCompare);
+        profileBtnContainerEl.appendChild(startAgainBtn);
     }
 }
 
@@ -189,4 +189,3 @@ function contains(array, obj) {
     }
     return false;
 }
-
