@@ -19,18 +19,16 @@ var birthdayDate = new Date(birthday);
 var nasaAPIKey = "yO4gV7LKJVWKPZKFc7GlvBh0f5Ig8XZN2KOgjgRp";
 var startDateNasa = new Date(1995, 6, 1);
 var today = new Date();
+var nasaQueryURL;
 
 // VARIABLES FOR COMPARISON
 var selected = []; // store two selected buttons
 
-
+/* --------------------------------------------- ACTION! ------------------------------------------------------------ */
 
 updateProfiles();
 
-if(profiles){
-    displayAllProfiles();
-}
-
+displayAllProfiles();
 
 
 /* -----------------------------------------------------FUNCTIONS ---------------------------------------------------- */
@@ -59,41 +57,44 @@ function updateProfiles(){
     }
 
 
+// ON-CLICK FUNCTION FOR SUBMIT BUTTON
+
 function submitForm(){
 
     updateProfiles();
+
+    var cardNameEl = document.querySelector("#cardName");
+    var cardDateEl = document.querySelector("#cardDate");
     
     var name = inputNameEl.value; 
     
     var bDay = inputDayEl.value;
     var bMonth = inputMonthEl.value;
     var bYear = inputYearEl.value;
-    birthday = bYear + "-" + bMonth + "-" + bDay;
 
-    var cardNameEl = document.querySelector("#cardName");
-    var cardDateEl = document.querySelector("#cardDate");
-    cardNameEl.textContent = name;
-    cardDateEl.textContent = dayjs(birthday).format("DD MMM YYYY");
-    
-    if(birthdayDate > startDateNasa){ // If birthday is in the range of NASA pic of the day (from 1995)
-        fetchNASAPicture(birthday);
-    } else {    // otherwise create a random date and choose a random pic
-        var randomDate = new Date(startDateNasa.getTime() + Math.random() * (today.getTime() - startDateNasa.getTime()));
-        var randomDateFormatted = dayjs(randomDate).format("YYYY-MM-DD");
-        fetchNASAPicture(randomDateFormatted);
-    }
     
     // Create a new profile object and store it in the localStorage
     if (name && birthday){
+        birthday = bYear + "-" + bMonth + "-" + bDay;
+        nasaQueryURL = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + birthday;
+        checkIfDateInNasaRange(birthdayFormatted);
         createProfile(name, birthday);
+
     } else if (!name){
+        birthday = bYear + "-" + bMonth + "-" + bDay;
+        nasaQueryURL = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + birthday;
         name = "Anonymous";
+        checkIfDateInNasaRange(birthdayFormatted);
         createProfile(name, birthday);
-        console.log(name);
+
     } else if (!birthday){
         birthday = "2000-01-01";
+        checkIfDateInNasaRange(birthday);
         createProfile(name, birthday);
     }
+
+    cardNameEl.textContent = name;
+    cardDateEl.textContent = dayjs(birthday).format("DD MMM YYYY");
 }
 
 function createProfile(name, birthday){
@@ -110,35 +111,44 @@ function createProfile(name, birthday){
 
 // FETCH NASA PICTURE OF THE DAY AND DISPLAY
 
-function fetchNASAPicture(date){
-    var nasaQueryURL = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date="+ date;
-    
+function fetchNASAPicture(){
     fetch(nasaQueryURL)
     .then(function(response){
         return response.json();
     })
     .then(function(data){
-        var nasaPictureURL = data.url
+        console.log(data);
+        var nasaPictureURL = data.url;
+        var nasaPictureTitle = data.title;
         pictureCardEl.setAttribute("src", nasaPictureURL);  // ENABLE WHEN READY
+        pictureCardEl.setAttribute("alt", nasaPictureTitle);
 })
+}
+
+function checkIfDateInNasaRange(date){
+    if(date > startDateNasa){ // If birthday is in the range of NASA pic of the day (from 1995)
+        fetchNASAPicture(date);
+    } else {    // otherwise create a random date and choose a random pic
+        var randomDate = new Date(startDateNasa.getTime() + Math.random() * (today.getTime() - startDateNasa.getTime()));
+        var randomDateFormatted = dayjs(randomDate).format("YYYY-MM-DD");
+        fetchNASAPicture(randomDateFormatted);
+    }
 }
 
 // Display all the profiles as buttons in the NAV bar
 function displayAllProfiles(){
-    var profileBtnContainerEl = document.querySelector("#buttonName"); 
+    var profileBtnContainerEl = document.querySelector("#buttonName");
+    var buttonCompare = document.querySelector("#checkBtn");
 
     if (localStorage){
         while(profileBtnContainerEl.lastChild){
             profileBtnContainerEl.removeChild(profileBtnContainerEl.lastChild);
         }
 
-        console.log("profiles: " + JSON.stringify(profiles));
-
         for(i=0; i < profiles.length; i++){
             var profileBtn = document.createElement("button");
-            var buttonCompare = document.querySelector(".customBtn-check");
-            profileBtn.setAttribute("class", "customBtn");
 
+            profileBtn.setAttribute("class", "customBtn");
             profileBtn.textContent = profiles[i].name;
 
             profileBtnContainerEl.insertBefore(profileBtn, buttonCompare);
