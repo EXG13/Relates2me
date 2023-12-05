@@ -258,6 +258,7 @@ i {
   border-top: 30px solid var(--unnamed-color-13695b);
   filter: brightness(150%) saturate(150%);
   opacity: 0.5;
+  border-radius: 7px;
 }
 
 .form-control:hover {
