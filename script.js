@@ -120,6 +120,9 @@ function fetchNASAPicture(date){
 
 // Display all the profiles as buttons in the NAV bar
 function displayAllProfiles(){
+    while(i--){
+        
+    }
     if (localStorage){
         console.log("profiles: " + JSON.stringify(profiles));
         var buttonCompare = document.querySelector(".customBtn-check");
