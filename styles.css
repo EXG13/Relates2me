@@ -494,7 +494,7 @@ i {
 }
 
 #card-comparison-back {
-  height: 150vh;
+  height: 180vh;
   background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.9)),
     url(./assets/pexels-alex-andrews-3805983.jpg);
   background-repeat: no-repeat;
@@ -516,7 +516,7 @@ i {
 .card-comperison-body {
   background:  rgba(99, 23, 127, 0.4);
   color: white ;
-  height: 55%;
+  height: 70%;
 }
 .card-img-top {
   opacity: 0.4;
@@ -538,21 +538,21 @@ i {
   overflow: auto
 }
 
-@media screen and (max-width: 998px) {
+@media screen and (max-width: 900px) {
   .card-comparison-header {
     font-size: 40px;
-  }
-  .card-comparison-header{
     margin-top: 50px;
   }
+  
   .birthDate {
     font-size: 16px;
   }
   .card-comperison-text {
-    font-size: 12px;
+    font-size: 3vh;
   }
-  .card-comperison-body{
-    height: 65%;
+  
+  #card-comparison-back {
+    height: 230vh;
   }
 }
 /* End card comparison section */
