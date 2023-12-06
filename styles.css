@@ -16,6 +16,7 @@
   font-family: "Barlow", sans-serif;
   color: var(--unnamed-color-daefeb);
   scroll-behavior: smooth;
+  /* overflow: hidden; */
 }
 
 /* nav */
@@ -372,6 +373,11 @@ i {
   border: none;
 }
 
+.date-section button a {
+  text-decoration: none;
+  color: var(--unnamed-color-daefeb);
+}
+
 .date-section button:hover {
   background-color: var(--unnamed-color-13695b);
   border-color: var(--unnamed-color-13695b);
@@ -382,8 +388,7 @@ i {
 /*//////////////////////////////////// CARD SECTION ////////////////////////////////////*/
 
 .card-section {
-  position: relative;
-  margin: 0;
+  /* position: relative; */
   padding: 20px;
   height: 120vh;
   width: 100%;
@@ -485,6 +490,15 @@ i {
     font-size: 20px;
   }
 }
+
+
+@media screen and (max-width: 480px) {
+
+
+
+
+}
+
 /*//////////////////////////////////// END OF CARD SECTION ////////////////////////////////////*/
 
 /* Card comparison section */
