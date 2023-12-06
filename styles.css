@@ -16,6 +16,7 @@
   font-family: "Barlow", sans-serif;
   color: var(--unnamed-color-daefeb);
   scroll-behavior: smooth;
+  /* overflow: hidden; */
 }
 
 /* nav */
@@ -135,7 +136,7 @@ i {
   font-size: small;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
   #comparison h1 {
     font-size: 45px;
   }
@@ -172,7 +173,7 @@ i {
 }
 
 #hero h1 {
-  font-size: 4rem;
+  font-size: 64px;
   font-weight: 600;
 }
 
@@ -197,13 +198,21 @@ i {
 
 /* end of hero */
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
+  #hero {
+    min-width: 400px;
+  }
+
   #hero h1 {
-    font-size: 3rem;
+    font-size: 35px;
   }
 
   #hero p {
-    padding: 2rem;
+    padding: 35px;
+  }
+
+  .navbar-toggler {
+    display: none;
   }
 }
 
@@ -237,7 +246,8 @@ i {
   height: 50px;
   border-radius: 10px;
   background: var(--unnamed-color-13695b);
-  opacity: 0.7;
+  filter: brightness(150%) saturate(150%);
+  opacity: 0.5;
   font-size: 28px;
   font-weight: 600;
   word-spacing: 5px;
@@ -255,7 +265,8 @@ i {
   border-left: 25px solid transparent;
   border-right: 25px solid transparent;
   border-top: 30px solid var(--unnamed-color-13695b);
-  opacity: 0.7;
+  filter: brightness(150%) saturate(150%);
+  opacity: 0.5;
   border-radius: 7px;
 }
 
@@ -265,10 +276,7 @@ i {
   box-shadow: none;
   color: white;
 }
-.form-control:focus {
-  background: var(--unnamed-color-94bbb3);
-  color: white;
-}
+
 .form-control:hover::content {
   color: white;
 }
@@ -373,6 +381,11 @@ i {
   border: none;
 }
 
+.date-section button a {
+  text-decoration: none;
+  color: var(--unnamed-color-daefeb);
+}
+
 .date-section button:hover {
   background-color: var(--unnamed-color-13695b);
   border-color: var(--unnamed-color-13695b);
@@ -383,8 +396,7 @@ i {
 /*//////////////////////////////////// CARD SECTION ////////////////////////////////////*/
 
 .card-section {
-  position: relative;
-  margin: 0;
+  /* position: relative; */
   padding: 20px;
   height: 120vh;
   width: 100%;
@@ -451,7 +463,6 @@ i {
   .card img {
     height: 300px;
     width: 300px;
-
     background-position: center;
     background-size: cover;
     background-attachment: fixed;
@@ -487,4 +498,78 @@ i {
     font-size: 20px;
   }
 }
+
+@media screen and (max-width: 480px) {
+}
+
 /*//////////////////////////////////// END OF CARD SECTION ////////////////////////////////////*/
+
+/* Card comparison section */
+.card-comparison-section {
+  width: 100%;
+  position: relative;
+}
+
+#card-comparison-back {
+  height: 150vh;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.527), rgba(0, 0, 0, 0.9)),
+    url(./assets/pexels-alex-andrews-3805983.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.card-comparison-header {
+  margin-top: 100px;
+  font-size: 56px;
+  color: var(--unnamed-color-daefeb);
+}
+
+.card-comperison {
+  filter: brightness(140%) saturate(200%);
+}
+
+.card-comperison-body {
+  background: rgba(99, 23, 127, 0.4);
+  color: white;
+  height: 55%;
+}
+.card-img-top {
+  opacity: 0.4;
+}
+
+.card-comperison-name {
+  font-weight: 500;
+}
+
+.birthDate {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: 1.5px;
+}
+
+.card-comperison-text {
+  font-size: 16px;
+  font-weight: 100;
+  overflow: auto;
+}
+
+@media screen and (max-width: 998px) {
+  .card-comparison-header {
+    font-size: 40px;
+  }
+  .card-comparison-header {
+    margin-top: 50px;
+  }
+  .birthDate {
+    font-size: 16px;
+  }
+  .card-comperison-text {
+    font-size: 12px;
+  }
+  .card-comperison-body {
+    height: 65%;
+  }
+}
+/* End card comparison section */
