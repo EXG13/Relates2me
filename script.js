@@ -8,17 +8,15 @@ var profileBtnContainerEl = document.querySelector("#buttonName");
 var buttonCompare = document.querySelector("#checkBtn");
 var startAgainBtn = document.querySelector('#startAgain');
 var navBarEl = document.querySelector("#navbarNav");
-var navToggleEl = document.querySelector(".navbar-toggler");
+var pictureCardEl = document.querySelector("#cardPicture"); 
 
-var originalBirthday;
-
-var pictureCardEl = document.querySelector("#cardPicture"); // TO UPDATE WHEN READY
-
+// VARIABLES RELATED TO PROFILES
 var profiles = [];
 var profile = {
     name: "",
     birthday: "",
 }
+var originalBirthday;
 var birthday; 
 var birthdayDate = new Date(birthday);
 
@@ -27,17 +25,21 @@ var nasaAPIKey = "yO4gV7LKJVWKPZKFc7GlvBh0f5Ig8XZN2KOgjgRp";
 var startDateNasa = new Date(1995, 6, 1);
 var today = new Date();
 var nasaQueryURL;
+var nasaPictureURL = "./assets/pexels-alex-andrews-3805983.jpg";
+var nasaPictureTitle = "Milky Way";
 
 // VARIABLES FOR COMPARISON
-var selected = []; // store two selected buttons
 var CardOnePic = document.querySelector("#comparison-picture");
 var CardTwoPic = document.querySelector("#second-comparison-picture");
 var CardOneName = document.querySelector("#comperison-name");
 var CardTwoName = document.querySelector("#second-comperison-name");
 var CardOneDate = document.querySelector("#birth-date");
 var CardTwoDate = document.querySelector("#second-birth-date");
+var selected = []; // store two selected buttons
 
-/* --------------------------------------------- ACTION! ------------------------------------------------------------ */
+
+
+/* ------------------------------------------------- ACTION! ------------------------------------------------------------ */
 
 updateProfiles();
 
@@ -52,13 +54,12 @@ buttonCompare.addEventListener("click", function(e){
 
 
 
-/* -----------------------------------------------------FUNCTIONS ---------------------------------------------------- */
+/* ----------------------------------------------------------FUNCTIONS ---------------------------------------------------- */
 
 // ON-CLICK FUNCTION FOR SUBMIT BUTTON
 
 function submitForm(){
     
-
     updateProfiles();
 
     var cardNameEl = document.querySelector("#cardName");
@@ -69,39 +70,64 @@ function submitForm(){
     var bDay = inputDayEl.value;
     var bMonth = inputMonthEl.value;
     var bYear = inputYearEl.value;
-    originalBirthday = bYear + "-" + bMonth + "-" + bDay;
-    console.log(new Date(originalBirthday));
 
-    cardNameEl.textContent = name;
+    originalBirthday = bYear + "-" + bMonth + "-" + bDay;
+
     if(new Date(originalBirthday) != "Invalid Date"){
         cardDateEl.textContent = dayjs(originalBirthday).format("DD MMM YYYY");
+        birthday = returnBirthday(originalBirthday);
     } else {
         cardDateEl.textContent = "Input a correct date!";
+        pictureCardEl.setAttribute("src", "./assets/pexels-alex-andrews-3805983.jpg"); 
+        pictureCardEl.setAttribute("alt", "Milky Way");
+        return;
     }
-    
 
-    
-    // Create a new profile object and store it in the localStorage
-    if (name && birthday){
-        birthday = dayjs(originalBirthday).format("YYYY-MM-DD");
-        nasaQueryURL = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + birthday;
-        fetchNASAPicture();
-        createProfile(name, originalBirthday);
-
-    } else if (!name){
-        birthday = returnBirthday(originalBirthday);
-        nasaQueryURL = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + birthday;
+    if(!name){
         name = "Anonymous";
-        fetchNASAPicture();
-        createProfile(name, originalBirthday);
-
-    } else if (birthday === undefined || birthday === null){
-        console.log("undefined!");
-        console.log("n only " + birthday);
-        birthday = randomiseDate();
-        fetchNASAPicture();
-        createProfile(name, originalBirthday);
     }
+
+    cardNameEl.textContent = name;
+
+    if(!birthday){
+        cardDateEl.textContent = "Input a correct date!";
+        pictureCardEl.setAttribute("src", "./assets/pexels-alex-andrews-3805983.jpg"); 
+        pictureCardEl.setAttribute("alt", "Milky Way");
+        return;
+    }
+
+
+
+    // Fetch Data from NASA API
+
+    // birthday = returnBirthday(originalBirthday);
+
+    // birthday = dayjs(originalBirthday).format("YYYY-MM-DD");
+
+    nasaQueryURL = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + birthday;
+
+    try {
+        fetch(nasaQueryURL)
+        .then(function(response){
+            return response.json();
+        })
+        .then(function(data){
+            pictureCardEl.setAttribute("src", data.url); 
+            pictureCardEl.setAttribute("alt", data.title);
+            })
+    } catch (error) {
+        pictureCardEl.setAttribute("src", "./assets/pexels-alex-andrews-3805983.jpg"); 
+        pictureCardEl.setAttribute("alt", "Milky Way");
+        console.log("sorry, API struggles to fetch your data");
+    }
+    
+
+    createProfile(name, originalBirthday);
+    inputNameEl.value = '';
+    inputDayEl.value = '';
+    inputMonthEl.value = '';
+    inputYearEl.value = '';
+
 }
 
 
@@ -111,12 +137,12 @@ function submitForm(){
 
 function saveToLocalStorage(object){
 
-    if (profiles.length < 9){
+    if (profiles.length < 8){
         if(!avoidDuplicates(profiles, object)){
             profiles.push(object);
         }
         
-    } else if (profiles.length >= 9) {
+    } else {
         if(!avoidDuplicates(profiles, object)){
             profiles.shift(profiles[0]);
             profiles.push(object);
@@ -220,10 +246,6 @@ function compareTwoProfiles(e){
     
     tempNoOn = tempClasses.length;
 
-    // addToCompare(selectedProfile.innerHTML, selectedProfile.id);
-    // console.log(selected);
-    // displayComparison();
-
 }
 
 function displayComparison(){
@@ -232,14 +254,47 @@ function displayComparison(){
         console.log('that worked');
         var profileOneName = selected[0].name;
         var profileTwoName = selected[1].name;
-        var profileOneBirthday = returnBirthday(selected[0].birthday);
-        var profileTwoBirthday = returnBirthday(selected[1].birthday);
+        var profileOneBirthday = selected[0].birthday;
+        var profileTwoBirthday = selected[1].birthday;
 
 
 
-        nasaQueryURLOne = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + birthday;
+        nasaQueryURLOne = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + returnBirthday(profileOneBirthday);
+        nasaQueryURLTwo = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + returnBirthday(profileTwoBirthday);
 
-        fetchNASAPicture();
+
+
+        try {
+            fetch(nasaQueryURLOne)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(data){
+                CardOnePic.setAttribute("src", data.url);
+                CardOnePic.setAttribute("alt", data.title);
+                })
+        } catch (error) {
+            console.log("sorry, API struggles to fetch your data");
+            CardOnePic.setAttribute("src", "./assets/pexels-alex-andrews-3805983.jpg");
+            CardOnePic.setAttribute("alt", "Milky Way");
+        }
+
+
+        try {
+            fetch(nasaQueryURLTwo)
+            .then(function(response){
+                return response.json();
+            })
+            .then(function(data){
+                CardTwoPic.setAttribute("src", data.url);
+                CardTwoPic.setAttribute("alt", data.title);
+                })
+        } catch (error) {
+            console.log("sorry, API struggles to fetch your data");
+            CardTwoPic.setAttribute("src", "./assets/pexels-alex-andrews-3805983.jpg");
+            CardTwoPic.setAttribute("alt", "Milky Way");
+        }
+        
 
 
 
@@ -297,73 +352,10 @@ function contains(array, obj) {
 
 
 
-
-
 function disableSelection(){
     // console.log(profileBtnContainerEl);
     // profileBtnContainerEl
 }
-
-
-
-// NASA API -------------------------------------------------------------------------------------------------------------
-
-// FETCH NASA PICTURE OF THE DAY AND DISPLAY
-
-function fetchNASAPicture(){
-    try {
-        fetch(nasaQueryURL)
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(data){
-            var nasaPictureURL = data.url;
-            var nasaPictureTitle = data.title;
-            pictureCardEl.setAttribute("src", nasaPictureURL); 
-            pictureCardEl.setAttribute("alt", nasaPictureTitle);
-        })
-    } catch (error) {
-        console.log("sorry, API struggles to fetch your data");
-        pictureCardEl.setAttribute("src", "./assets/pexels-alex-andrews-3805983.jpg"); 
-        pictureCardEl.setAttribute("alt", "Milky Way");
-    }
-    
-}
-
-
-function fetchNASAPicURL(){
-    try {
-        fetch(nasaQueryURL)
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(data){
-            var nasaPictureURL = data.url;
-            return nasaPictureURL;
-        })
-    } catch (error) {
-        console.log("sorry, API struggles to fetch your data");
-        return nasaPictureURL = "./assets/pexels-alex-andrews-3805983.jpg";
-    }
-}
-
-
-function fetchNASAPicTitle(){
-    try {
-        fetch(nasaQueryURL)
-        .then(function(response){
-            return response.json();
-        })
-        .then(function(data){
-            var nasaPictureTitle = data.title;
-            return nasaPictureTitle;
-        })
-    } catch (error) {
-        console.log("sorry, API struggles to fetch your data");
-        return nasaPictureTitle = "Milky Way";
-    }
-}
-
 
 
 // Return Birthday date (real or random) within the range of NASA API
@@ -371,15 +363,25 @@ function returnBirthday(date){
     birthday = new Date(date);
     if(birthday > startDateNasa){ // If birthday is in the range of NASA pic of the day (from 1995)
         birthday = dayjs(birthday).format("YYYY-MM-DD");
-        return birthday;
     } else {    // otherwise create a random date and choose a random pic
         birthday = dayjs(randomiseDate()).format("YYYY-MM-DD");
-        return birthday;
     }
+    return birthday;
 }
 
 function randomiseDate(){
     var randomDate = new Date(startDateNasa.getTime() + Math.random() * (today.getTime() - startDateNasa.getTime()));
     var randomDateFormatted = dayjs(randomDate).format("YYYY-MM-DD");
     return randomDateFormatted;
+}
+
+
+// Toggle Navbar
+function toggleNavbar(){
+
+    if(navBarEl.classList.contains('show')){
+        navBarEl.classList.remove('show');
+    } else {
+        navBarEl.classList.add('show');
+    }
 }
