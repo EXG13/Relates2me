@@ -16,6 +16,7 @@
   font-family: "Barlow", sans-serif;
   color: var(--unnamed-color-daefeb);
   scroll-behavior: smooth;
+  /* overflow: hidden; */
 }
 
 /* nav */
@@ -135,7 +136,7 @@ i {
   font-size: small;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
   #comparison h1 {
     font-size: 45px;
   }
@@ -172,7 +173,7 @@ i {
 }
 
 #hero h1 {
-  font-size: 4rem;
+  font-size: 64px;
   font-weight: 600;
 }
 
@@ -197,13 +198,21 @@ i {
 
 /* end of hero */
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
+  #hero {
+    min-width: 400px;
+  }
+
   #hero h1 {
-    font-size: 3rem;
+    font-size: 35px;
   }
 
   #hero p {
-    padding: 2rem;
+    padding: 35px;
+  }
+
+  .navbar-toggler {
+    display: none;
   }
 }
 
@@ -372,6 +381,11 @@ i {
   border: none;
 }
 
+.date-section button a {
+  text-decoration: none;
+  color: var(--unnamed-color-daefeb);
+}
+
 .date-section button:hover {
   background-color: var(--unnamed-color-13695b);
   border-color: var(--unnamed-color-13695b);
@@ -382,8 +396,7 @@ i {
 /*//////////////////////////////////// CARD SECTION ////////////////////////////////////*/
 
 .card-section {
-  position: relative;
-  margin: 0;
+  /* position: relative; */
   padding: 20px;
   height: 120vh;
   width: 100%;
@@ -485,6 +498,10 @@ i {
     font-size: 20px;
   }
 }
+
+@media screen and (max-width: 480px) {
+}
+
 /*//////////////////////////////////// END OF CARD SECTION ////////////////////////////////////*/
 
 /* Card comparison section */
@@ -535,7 +552,7 @@ i {
 .card-comperison-text {
   font-size: 16px;
   font-weight: 100;
-  overflow: auto
+  overflow: auto;
 }
 
 @media screen and (max-width: 900px) {
