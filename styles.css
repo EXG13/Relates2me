@@ -136,7 +136,7 @@ i {
   font-size: small;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
   #comparison h1 {
     font-size: 45px;
   }
@@ -173,7 +173,7 @@ i {
 }
 
 #hero h1 {
-  font-size: 4rem;
+  font-size: 64px;
   font-weight: 600;
 }
 
@@ -198,13 +198,21 @@ i {
 
 /* end of hero */
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
+  #hero {
+    min-width: 400px;
+  }
+
   #hero h1 {
-    font-size: 3rem;
+    font-size: 35px;
   }
 
   #hero p {
-    padding: 2rem;
+    padding: 35px;
+  }
+
+  .navbar-toggler {
+    display: none;
   }
 }
 
@@ -491,12 +499,7 @@ i {
   }
 }
 
-
 @media screen and (max-width: 480px) {
-
-
-
-
 }
 
 /*//////////////////////////////////// END OF CARD SECTION ////////////////////////////////////*/
@@ -528,8 +531,8 @@ i {
 }
 
 .card-comperison-body {
-  background:  rgba(99, 23, 127, 0.4);
-  color: white ;
+  background: rgba(99, 23, 127, 0.4);
+  color: white;
   height: 55%;
 }
 .card-img-top {
@@ -549,14 +552,14 @@ i {
 .card-comperison-text {
   font-size: 16px;
   font-weight: 100;
-  overflow: auto
+  overflow: auto;
 }
 
 @media screen and (max-width: 998px) {
   .card-comparison-header {
     font-size: 40px;
   }
-  .card-comparison-header{
+  .card-comparison-header {
     margin-top: 50px;
   }
   .birthDate {
@@ -565,7 +568,7 @@ i {
   .card-comperison-text {
     font-size: 12px;
   }
-  .card-comperison-body{
+  .card-comperison-body {
     height: 65%;
   }
 }
