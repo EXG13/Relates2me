@@ -198,7 +198,6 @@ function displayAllProfiles(){
     }
 }
 
-
 // SELECTION OF 2 TO COMPARE -------------------------------------------------------------------------------------------
 
 // Select profiles when clicked -- only allow 2 selections
