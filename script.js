@@ -1,4 +1,4 @@
-/* --------------------------------------------------- VARIABLES ---------------------------------------------------- */
+/* ******************************************************** VARIABLES ********************************************************** */
 var inputDayEl = document.querySelector("#day");
 var inputMonthEl = document.querySelector("#month"); 
 var inputYearEl = document.querySelector("#year");
@@ -39,7 +39,7 @@ var selected = []; // store two selected buttons
 
 
 
-/* ------------------------------------------------- ACTION! ------------------------------------------------------------ */
+/* **************************************************** ACTION! ***************************************************************** */
 
 updateProfiles();  // store profiles in Local Storage and array
 
@@ -51,7 +51,7 @@ buttonCompare.addEventListener("click", displayComparison);  // display comparis
 
 
 
-/* ----------------------------------------------------------FUNCTIONS ---------------------------------------------------- */
+/* *********************************************** FUNCTIONS ******************************************************************* */
 
 // HANDLE BUTTONS (ON-CLICK) --------------------------------------------------------------------------------------------------------
 
@@ -229,7 +229,7 @@ function displayAllProfiles(){
 function compareTwoProfiles(e){
     selectedProfile = e.target;
     var listOfChildren = selectedProfile.parentNode.children;
-    var tempClasses = [];
+    var tempClasses = []; // store on classes - to check the number
 
     for(i=0; i<listOfChildren.length; i++){
         if(listOfChildren[i].className === "customBtn on"){
@@ -245,18 +245,13 @@ function compareTwoProfiles(e){
         if(selectedProfile.classList[1] === "off" && tempNoOn < 2){
             selectedProfile.setAttribute("class", "customBtn on");
             addToCompare(selectedProfile.innerHTML, selectedProfile.id);
-        } else if(selectedProfile.classList[1] === "on" && tempNoOn >= 2){
+        } else {
             removeFromComparison(selectedProfile.innerHTML);
-            console.log(selectedProfile.innerHTML)
             selectedProfile.setAttribute("class", "customBtn off");
-        } else         
-        {
-            selectedProfile.setAttribute("class", "customBtn off");
-        }
+        } 
     }
     
     tempNoOn = tempClasses.length; // update the number
-
 }
 
 // display comparison on the cards and close the navbar
@@ -366,11 +361,7 @@ function contains(array, obj) {
 
 
 
-function disableSelection(){
-    // console.log(profileBtnContainerEl);
-    // profileBtnContainerEl
-}
-
+// NASA API ------------------------------------------------------------------------------------------------------------------------
 
 // Return Birthday date (real or random) within the range of NASA API
 function returnBirthday(date){
