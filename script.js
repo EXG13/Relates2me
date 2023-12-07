@@ -41,22 +41,21 @@ var selected = []; // store two selected buttons
 
 /* ------------------------------------------------- ACTION! ------------------------------------------------------------ */
 
-updateProfiles();
+updateProfiles();  // store profiles in Local Storage and array
 
-displayAllProfiles();
+displayAllProfiles(); // display profiles as buttons in navbar
 
-profileBtnContainerEl.addEventListener("click", compareTwoProfiles);
+profileBtnContainerEl.addEventListener("click", compareTwoProfiles);  // select two profiles to compare (profiles buttons)
 
-buttonCompare.addEventListener("click", function(e){
-    e.preventDefault();
-    displayComparison();
-});
+buttonCompare.addEventListener("click", displayComparison);  // display comparison (compare button)
 
 
 
 /* ----------------------------------------------------------FUNCTIONS ---------------------------------------------------- */
 
-// ON-CLICK FUNCTION FOR SUBMIT BUTTON
+// HANDLE BUTTONS (ON-CLICK) --------------------------------------------------------------------------------------------------------
+
+// Submit (Reveal) Button
 
 function submitForm(){
     
@@ -130,10 +129,20 @@ function submitForm(){
 
 }
 
+// Toggle Navbar (Start Again button)
+function toggleNavbar(){
 
-// LOCAL STORAGE ----------------------------------------------------------------------------------------------------
+    if(navBarEl.classList.contains('show')){
+        navBarEl.classList.remove('show');
+    } else {
+        navBarEl.classList.add('show');
+    }
+}
 
-// SAVE TO LOCAL STORAGE 
+
+// LOCAL STORAGE -----------------------------------------------------------------------------------------------------------
+
+// Save max 8 profiles to Local Storage and remove the first one to add a new one if more than 8 searches
 
 function saveToLocalStorage(object){
 
@@ -152,8 +161,7 @@ function saveToLocalStorage(object){
     localStorage.setItem("profiles", JSON.stringify(profiles));
 }
 
-
-// Avoid duplicates
+// Avoid duplicated profiles in Local Storage and in PROFILES Array
 
 function avoidDuplicates(array, object){
     for (i=0; i<array.length; i++){
@@ -164,7 +172,7 @@ function avoidDuplicates(array, object){
 }
 
 
-// UPDATE LOCAL STORAGE & DISPLAYED PROFILES
+// Update Local Storage and update PROFILES array
 
 function updateProfiles(){
     var savedProfiles;
@@ -179,7 +187,7 @@ function updateProfiles(){
         }
     }
 
-// Create profiles
+// Create profiles (as objects) and display them in navbar
 function createProfile(name, birthday){
     var newProfile = Object.create(profile);
     var newProfileName = name;
@@ -190,10 +198,8 @@ function createProfile(name, birthday){
     displayAllProfiles();
 }
 
-
 // Display all the profiles as buttons in the NAV bar
 function displayAllProfiles(){
-
     if (localStorage){
         
         while(profileBtnContainerEl.lastChild){
@@ -210,15 +216,16 @@ function displayAllProfiles(){
             profileBtnContainerEl.appendChild(profileBtn);
         }
 
+        // append start again and compare buttons again
         profileBtnContainerEl.appendChild(buttonCompare);
         profileBtnContainerEl.appendChild(startAgainBtn);
     }
 }
 
 
-
 // SELECTION OF 2 TO COMPARE -------------------------------------------------------------------------------------------
 
+// Select profiles when clicked -- only allow 2 selections
 function compareTwoProfiles(e){
     selectedProfile = e.target;
     var listOfChildren = selectedProfile.parentNode.children;
@@ -230,7 +237,7 @@ function compareTwoProfiles(e){
             }
         }
 
-    var tempNoOn = tempClasses.length;
+    var tempNoOn = tempClasses.length; // store temporarily number of items with class ON
 
     if(selectedProfile.id === "checkBtn"){
         displayComparison();
@@ -238,31 +245,33 @@ function compareTwoProfiles(e){
         if(selectedProfile.classList[1] === "off" && tempNoOn < 2){
             selectedProfile.setAttribute("class", "customBtn on");
             addToCompare(selectedProfile.innerHTML, selectedProfile.id);
-            console.log(selected);
-        } else {
-        selectedProfile.setAttribute("class", "customBtn off");
+        } else if(selectedProfile.classList[1] === "on" && tempNoOn >= 2){
+            removeFromComparison(selectedProfile.innerHTML);
+            console.log(selectedProfile.innerHTML)
+            selectedProfile.setAttribute("class", "customBtn off");
+        } else         
+        {
+            selectedProfile.setAttribute("class", "customBtn off");
         }
     }
     
-    tempNoOn = tempClasses.length;
+    tempNoOn = tempClasses.length; // update the number
 
 }
 
+// display comparison on the cards and close the navbar
 function displayComparison(){
 
     if(selected.length === 2){
-        console.log('that worked');
         var profileOneName = selected[0].name;
         var profileTwoName = selected[1].name;
         var profileOneBirthday = selected[0].birthday;
         var profileTwoBirthday = selected[1].birthday;
 
-
+        // fetch pics from Nasa
 
         nasaQueryURLOne = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + returnBirthday(profileOneBirthday);
         nasaQueryURLTwo = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + returnBirthday(profileTwoBirthday);
-
-
 
         try {
             fetch(nasaQueryURLOne)
@@ -279,7 +288,6 @@ function displayComparison(){
             CardOnePic.setAttribute("alt", "Milky Way");
         }
 
-
         try {
             fetch(nasaQueryURLTwo)
             .then(function(response){
@@ -295,32 +303,38 @@ function displayComparison(){
             CardTwoPic.setAttribute("alt", "Milky Way");
         }
         
-
-
-
-
-
-        // CardOnePic;
+        // display info
         CardOneName.textContent = profileOneName.toString();
         CardOneDate.textContent = profileOneBirthday.toString();
-        // CardTwoPic;
         CardTwoName.textContent = profileTwoName.toString();
         CardTwoDate.textContent = profileTwoBirthday.toString();
 
-
+        // close navbar
         if(navBarEl.classList.contains('show')){
             console.log('hide!');
             navBarEl.classList.remove('show');
         }
-        window.location.href = "#card-comparison-back";
+        window.location.href = "#card-comparison-back"; // link to the section with two cards
 
     } else {
-        console.log("Select two profiles to compare!");
+        var comparisonDivEl = document.querySelector("#comparison");
+        var messageEl =comparisonDivEl.children[2];
+        messageEl.textContent = "Select two profiles to compare!"; // display message on the page
         return;
     }
 
 
 }
+
+// remove from comparison when profile unclicked
+function removeFromComparison(val){
+    for (i=0; i<selected.length; i++){
+        if(selected[i].name == val){
+            selected.shift(selected[i]);
+        } 
+    }
+} 
+
 
 //  select two (and only 2) elements
 function addToCompare(name, birthday){
@@ -376,12 +390,3 @@ function randomiseDate(){
 }
 
 
-// Toggle Navbar
-function toggleNavbar(){
-
-    if(navBarEl.classList.contains('show')){
-        navBarEl.classList.remove('show');
-    } else {
-        navBarEl.classList.add('show');
-    }
-}
