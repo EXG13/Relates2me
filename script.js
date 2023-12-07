@@ -3,7 +3,6 @@ var inputDayEl = document.querySelector("#day");
 var inputMonthEl = document.querySelector("#month"); 
 var inputYearEl = document.querySelector("#year");
 var inputNameEl = document.querySelector("#name-input");
-var SaveBtnEl = document.querySelector("button");
 var profileBtnContainerEl = document.querySelector("#buttonName");
 var buttonCompare = document.querySelector("#checkBtn");
 var startAgainBtn = document.querySelector('#startAgain');
@@ -88,20 +87,7 @@ function submitForm(){
 
     cardNameEl.textContent = name;
 
-    if(!birthday){
-        cardDateEl.textContent = "Input a correct date!";
-        pictureCardEl.setAttribute("src", "./assets/pexels-alex-andrews-3805983.jpg"); 
-        pictureCardEl.setAttribute("alt", "Milky Way");
-        return;
-    }
-
-
-
     // Fetch Data from NASA API
-
-    // birthday = returnBirthday(originalBirthday);
-
-    // birthday = dayjs(originalBirthday).format("YYYY-MM-DD");
 
     nasaQueryURL = "https://api.nasa.gov/planetary/apod?api_key=" + nasaAPIKey + "&date=" + birthday;
 
@@ -127,26 +113,16 @@ function submitForm(){
     inputMonthEl.value = '';
     inputYearEl.value = '';
 
+    window.location.href = "#cardNavSectionLink";
+
 }
-
-// Toggle Navbar (Start Again button)
-function toggleNavbar(){
-
-    if(navBarEl.classList.contains('show')){
-        navBarEl.classList.remove('show');
-    } else {
-        navBarEl.classList.add('show');
-    }
-}
-
-
 // LOCAL STORAGE -----------------------------------------------------------------------------------------------------------
 
 // Save max 8 profiles to Local Storage and remove the first one to add a new one if more than 8 searches
 
 function saveToLocalStorage(object){
 
-    if (profiles.length < 8){
+    if (profiles.length < 5){
         if(!avoidDuplicates(profiles, object)){
             profiles.push(object);
         }
@@ -298,15 +274,17 @@ function displayComparison(){
             CardTwoPic.setAttribute("alt", "Milky Way");
         }
         
+        birthdayOneFormatted = dayjs(profileOneBirthday).format("DD MMM YYYY");
+        birthdayTwoFormatted = dayjs(profileTwoBirthday).format("DD MMM YYYY");
+
         // display info
         CardOneName.textContent = profileOneName.toString();
-        CardOneDate.textContent = profileOneBirthday.toString();
+        CardOneDate.textContent = birthdayOneFormatted.toString();
         CardTwoName.textContent = profileTwoName.toString();
-        CardTwoDate.textContent = profileTwoBirthday.toString();
+        CardTwoDate.textContent = birthdayTwoFormatted.toString();
 
         // close navbar
         if(navBarEl.classList.contains('show')){
-            console.log('hide!');
             navBarEl.classList.remove('show');
         }
         window.location.href = "#card-comparison-back"; // link to the section with two cards
