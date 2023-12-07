@@ -348,7 +348,7 @@ i {
   width: 100px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   border: none;
-  outline: none; 
+  outline: none;
 }
 
 .date-section input[placeholder="YYYY"] {
@@ -357,7 +357,7 @@ i {
   width: 140px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   border: none;
-  outline: none; 
+  outline: none;
 }
 
 .date-section input[type="text"] {
@@ -463,6 +463,7 @@ i {
   justify-content: end;
   margin-right: 50px;
   list-style-type: none;
+  margin-top: 78px;
 }
 
 .cardNav ul {
