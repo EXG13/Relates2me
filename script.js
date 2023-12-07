@@ -357,5 +357,3 @@ function randomiseDate(){
     var randomDateFormatted = dayjs(randomDate).format("YYYY-MM-DD");
     return randomDateFormatted;
 }
-
-
