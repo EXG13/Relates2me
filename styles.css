@@ -100,7 +100,7 @@ span {
 }
 
 .on {
-  color: var(--unnamed-color-521369);
+  background-color: var(--unnamed-color-521369);
 }
 
 .customBtn:hover {
@@ -447,6 +447,7 @@ i {
 /*//////////////////////////////////// CARD SECTION ////////////////////////////////////*/
 
 .card-section {
+  display: block;
   padding: 20px;
   height: 100%;
   width: 100%;
@@ -515,6 +516,10 @@ i {
 
 .cardNav button a:hover {
   color: var(--unnamed-color-a994bb);
+}
+
+#secondNav {
+  display: none;
 }
 
 @media screen and (min-width: 768px) {
@@ -594,6 +599,17 @@ i {
 
   .card-text {
     font-size: 15px;
+  }
+
+  #secondNav {
+    display: flex;
+    position: absolute;
+    margin-left: 38%;
+    margin-top: 60px;
+  }
+
+  .navbar-toggler {
+    background-color: transparent;
   }
 }
 

@@ -2,7 +2,7 @@
 
 ## Description
 
-Link to website:
+Link to website: https://exg13.github.io/CelestialChronicles/
 
 ![Alt text](./screenshots/Hero%20section.PNG)
 ![Alt text](./screenshots/Name%20Section.PNG)
