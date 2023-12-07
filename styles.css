@@ -140,9 +140,10 @@ i {
   font-size: small;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 768px) {
   #comparison h1 {
-    font-size: 45px;
+    font-size: 35px;
+    margin-top: 20px;
   }
 
   #comparison p {
@@ -151,8 +152,10 @@ i {
 
   #navbarNav {
     background-position: center;
+    height: 115vh;
   }
 }
+
 /* end of nav */
 
 /* Hero */
