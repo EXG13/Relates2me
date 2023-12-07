@@ -348,6 +348,7 @@ i {
   width: 100px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   border: none;
+  outline: none; 
 }
 
 .date-section input[placeholder="YYYY"] {
@@ -356,6 +357,7 @@ i {
   width: 140px;
   font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif;
   border: none;
+  outline: none; 
 }
 
 .date-section input[type="text"] {
@@ -372,7 +374,7 @@ i {
   margin-left: 10px;
   margin-top: 169px;
   width: 369px;
-  height: 69px;
+  height: 59px;
   font-size: 20px;
   color: var(--unnamed-color-daefeb);
   background: #521369 0% 0% no-repeat padding-box;
@@ -424,14 +426,10 @@ i {
   .date-section input[placeholder="YYYY"] {
     font-size: 20px;
     width: 90px;
-    font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS",
-      sans-serif;
-    border: none;
   }
 
   .date-section input[type="text"] {
     border-radius: 17px;
-    border-color: var(--unnamed-color-13695b);
     margin: 5px 5px;
   }
 
