@@ -8,6 +8,7 @@ var buttonCompare = document.querySelector("#checkBtn");
 var startAgainBtn = document.querySelector("#startAgain");
 var navBarEl = document.querySelector("#navbarNav");
 var pictureCardEl = document.querySelector("#cardPicture");
+var cardTextEl = document.querySelector("#cardText") 
 
 // VARIABLES RELATED TO PROFILES
 var profiles = [];
@@ -34,6 +35,8 @@ var CardOneName = document.querySelector("#comperison-name");
 var CardTwoName = document.querySelector("#second-comperison-name");
 var CardOneDate = document.querySelector("#birth-date");
 var CardTwoDate = document.querySelector("#second-birth-date");
+var CardOneFact = document.querySelector("#comperison-content");
+var CardTwoFact = document.querySelector("#second-comperison-content");
 var selected = []; // store two selected buttons
 
 /* **************************************************** ACTION! ***************************************************************** */
@@ -110,6 +113,9 @@ function submitForm() {
     pictureCardEl.setAttribute("alt", "Milky Way");
     console.log("sorry, API struggles to fetch your data");
   }
+
+  // fetch data from numbers api
+  factFetch(bMonth,bDay)
 
   createProfile(name, originalBirthday);
   inputNameEl.value = "";
@@ -364,4 +370,14 @@ function randomiseDate() {
   );
   var randomDateFormatted = dayjs(randomDate).format("YYYY-MM-DD");
   return randomDateFormatted;
+}
+
+// numbers api
+
+function factFetch(bMonth,bDay){
+  fetch("http://numbersapi.com/"+ bMonth + "/" + bDay)
+      .then((response) => response.text())
+      .then((data) => {
+          cardTextEl.textContent = (data)
+       })
 }
