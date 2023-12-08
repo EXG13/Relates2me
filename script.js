@@ -15,10 +15,12 @@ var profiles = [];
 var profile = {
   name: "",
   birthday: "",
+  fact: ""
 };
 var originalBirthday;
 var birthday;
 var birthdayDate = new Date(birthday);
+var fact = "test fact"
 
 // NASA API RELATED VARIABLES
 var nasaAPIKey = "yO4gV7LKJVWKPZKFc7GlvBh0f5Ig8XZN2KOgjgRp";
@@ -67,6 +69,11 @@ function submitForm() {
   var bMonth = inputMonthEl.value;
   var bYear = inputYearEl.value;
 
+  //fetching fact from numbers api
+
+  factFetch(bMonth,bDay)
+  //console.log(fact)
+
   originalBirthday = bYear + "-" + bMonth + "-" + bDay;
 
   if (new Date(originalBirthday) != "Invalid Date") {
@@ -114,10 +121,7 @@ function submitForm() {
     console.log("sorry, API struggles to fetch your data");
   }
 
-  // fetch data from numbers api
-  factFetch(bMonth,bDay)
-
-  createProfile(name, originalBirthday);
+  createProfile(name, originalBirthday, fact);
   inputNameEl.value = "";
   inputDayEl.value = "";
   inputMonthEl.value = "";
@@ -169,11 +173,15 @@ function updateProfiles() {
 }
 
 // Create profiles (as objects) and display them in navbar
-function createProfile(name, birthday) {
+function createProfile(name, birthday, fact) {
   var newProfile = Object.create(profile);
   var newProfileName = name;
+  //console.log("fact being added is: " + fact)
+  var newProfileFact = fact
   newProfile.name = newProfileName;
   newProfile.birthday = birthday;
+  newProfile.fact = newProfileFact
+  //console.log(newProfile)
   saveToLocalStorage(newProfile);
 
   displayAllProfiles();
@@ -190,7 +198,10 @@ function displayAllProfiles() {
       var profileBtn = document.createElement("button");
 
       profileBtn.setAttribute("class", "customBtn off");
+      //console.log("alt profile area")
+      //console.log(profiles[i])
       profileBtn.setAttribute("id", profiles[i].birthday);
+      profileBtn.setAttribute("alt", profiles[i].fact)
       profileBtn.textContent = profiles[i].name;
 
       profileBtnContainerEl.appendChild(profileBtn);
@@ -223,7 +234,12 @@ function compareTwoProfiles(e) {
   } else {
     if (selectedProfile.classList[1] === "off" && tempNoOn < 2) {
       selectedProfile.setAttribute("class", "customBtn on");
-      addToCompare(selectedProfile.innerHTML, selectedProfile.id);
+      //console.log(selectedProfile)
+      //console.log(selectedProfile.innerHTML)
+      //console.log(selectedProfile.id)
+      var tempfact = selectedProfile.getAttribute("alt")
+      //console.log(tempfact)
+      addToCompare(selectedProfile.innerHTML, selectedProfile.id, tempfact);
     } else {
       removeFromComparison(selectedProfile.innerHTML);
       selectedProfile.setAttribute("class", "customBtn off");
@@ -240,6 +256,10 @@ function displayComparison() {
     var profileTwoName = selected[1].name;
     var profileOneBirthday = selected[0].birthday;
     var profileTwoBirthday = selected[1].birthday;
+    //console.log("the display compartison")
+    //console.log(selected)
+    var ProfileOneFact = selected[0].fact
+    var ProfileTwoFact = selected[1].fact
 
     // fetch pics from Nasa
 
@@ -298,6 +318,9 @@ function displayComparison() {
     CardOneDate.textContent = birthdayOneFormatted.toString();
     CardTwoName.textContent = profileTwoName.toString();
     CardTwoDate.textContent = birthdayTwoFormatted.toString();
+    //console.log(ProfileOneFact)
+    CardOneFact.textContent = ProfileOneFact.toString();
+    CardTwoFact.textContent = ProfileTwoFact.toString();
 
     // close navbar
     if (navBarEl.classList.contains("show")) {
@@ -322,10 +345,11 @@ function removeFromComparison(val) {
 }
 
 //  select two (and only 2) elements
-function addToCompare(name, birthday) {
+function addToCompare(name, birthday, fact) {
   var selectedProfile = Object.create(profile);
   selectedProfile.name = name;
   selectedProfile.birthday = birthday;
+  selectedProfile.fact = fact;
 
   if (!contains(selected, selectedProfile.name)) {
     if (selected.length <= 1) {
@@ -372,12 +396,28 @@ function randomiseDate() {
   return randomDateFormatted;
 }
 
-// numbers api
+// numbers api fetching
 
 function factFetch(bMonth,bDay){
   fetch("http://numbersapi.com/"+ bMonth + "/" + bDay)
       .then((response) => response.text())
       .then((data) => {
+          fact = data
           cardTextEl.textContent = (data)
+          //console.log("the fetched fact is:" + fact)
+          return fact
        })
 }
+/*
+function factFetch(bMonth,bDay){
+  fetch("http://numbersapi.com/"+ bMonth + "/" + bDay)
+    .then(function(response) {
+      return response.json();
+    }).then(function (data) {
+      fact = data
+      cardTextEl.textContent = (data)
+      console.log("the fetched fact is:" + fact)
+      return fact
+    })
+}
+*/
